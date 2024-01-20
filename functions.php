@@ -1,19 +1,25 @@
 <?php
-function pdo_connect_mysql()
-{
-    //SQL details
-    $DATABASE_HOST = "localhost";
-    $DATABASE_USER = "root";
-    $DATABASE_PASS = "";
-    $DATABASE_NAME = "bookshop";
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+function pdo_connect_mysql() {
+
+    // create a data-source-name to connect to db
+    $dsn = "mysql:host=localhost;dbname=bookshop";
+    $dbusername = "root";
+    $dbpassword = "";
 
     try {
-        return new PDO('mysql:host=' . $DATABASE_HOST . ';dbname' . $DATABASE_NAME . ';charset=utf8', $DATABASE_USER, $DATABASE_PASS);
+        // pdo: php-data-object
+        $pdo = new PDO($dsn, $dbusername, $dbpassword);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $e) {
-        //give error msg if there is any error with database connection
-        exit('Failed to connect to database');
-    }
+        echo "Connection Failed " . $e->getMessage();
+        
+    } 
+    return $pdo; // Return the PDO instance
 }
+
 
 // Template header, feel free to customize this
 function template_header($title)
@@ -61,4 +67,3 @@ function template_footer()
     </html>
     EOT;
 }
-?>
