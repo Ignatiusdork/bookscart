@@ -20,6 +20,42 @@ $stmt->execute();
 // Fetch the products from the database and return the result as an Array
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-echo '<pre>';
-print_r($products);
-echo '</pre>';
+// Get the total number of products
+$total_products = $pdo->query('SELECT * FROM products')->rowCount();
+
+// <!-- echo '<pre>';
+// print_r($products);
+// echo '</pre>'; -->
+?>
+
+<?=template_header('Products')?>
+
+<div class="products content-wrapper">
+    <h1>List Of Books</h1>
+    <p><?=$total_products?> Books</p>
+    <div class="products-wrapper">
+        <?php foreach ($products as $product): ?>
+        <a href="index.php?page=product&id=<?=$product['id']?>" class="product">
+            <img src="imgs/<?=$product['img']?>" width="200" height="200" alt="<?=$product['name']?>">
+            <span class="name"><?=$product['name']?></span>
+            <span class="price">
+                &dollar;<?=$product['price']?>
+                <?php if ($product['rrp'] > 0): ?>
+                <span class="rrp">&dollar;<?=$product['rrp']?></span>
+                <?php endif; ?>
+            </span>
+        </a>
+        <?php endforeach; ?>
+    </div>
+    <div class="buttons">
+        <?php if ($current_page > 1): ?>
+        <a href="index.php?page=products&p=<?=$current_page-1?>">Prev</a>
+        <?php endif; ?>
+        <?php if ($total_products > ($current_page * $num_products_on_each_page) - $num_products_on_each_page + count($products)): ?>
+        <a href="index.php?page=products&p=<?=$current_page+1?>">Next</a>
+        <?php endif; ?>
+    </div>
+</div>
+
+<?=template_footer()?>
+
