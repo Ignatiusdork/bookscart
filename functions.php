@@ -24,6 +24,7 @@ function pdo_connect_mysql() {
 // Template header, feel free to customize this
 function template_header($title)
 {
+    $num_items_in_cart = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
     echo <<<EOT
     <!DOCTYPE html>
     <html>
@@ -44,6 +45,7 @@ function template_header($title)
                     <div class="link-icons">
                         <a href="index.php?page=cart">
                             <i class="fas fa-shopping-cart"></i>
+                            <span>$num_items_in_cart</span>
                         </a>
                     </div>
                 </div>
