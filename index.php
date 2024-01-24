@@ -13,7 +13,8 @@ include 'functions.php';
 // connect to db using the pdo
 $pdo = pdo_connect_mysql();
 
-//page is set to home
+//Basic Routing
+// Page is set to home (home.php) by default, so when the visitor visits, that will be the page they see.
 $page = isset($_GET['page']) && file_exists($_GET['page'] . '.php') ? $_GET['page'] : 'home';
 
 // Include and show the requested page
