@@ -1,4 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // Check to make sure the id parameter is specified in the URL
 if (isset($_GET['id'])) {
 

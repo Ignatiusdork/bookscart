@@ -20,7 +20,6 @@ function pdo_connect_mysql() {
     return $pdo; // Return the PDO instance
 }
 
-
 // Template header, feel free to customize this
 function template_header($title)
 {
