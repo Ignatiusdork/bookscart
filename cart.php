@@ -24,6 +24,7 @@ if (isset($_POST['product_id'], $_POST['quantity']) && is_numeric($_POST['produc
         // Product exists in database, now we can create/update the session variable for the cart
         if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
             if (array_key_exists($product_id, $_SESSION['cart'])) {
+                
                 // Product exists in cart so just update the quanity
                 $_SESSION['cart'][$product_id] += $quantity;
             } else {
@@ -97,6 +98,7 @@ if ($products_in_cart) {
     }
 }
 
+//unset($_SESSION['cart'])
 ?>
 
 <?=template_header('Cart')?>
